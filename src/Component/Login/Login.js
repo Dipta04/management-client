@@ -9,7 +9,7 @@ const Login = () => {
     const {logIn, googleSignIn, setLoading} = useContext(AuthContext);
     const navigate = useNavigate();
     const location =useLocation();
-    const from = location.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || '/addtask';
 
    const handleSubmit = (event) =>{
         event.preventDefault();

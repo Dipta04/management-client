@@ -10,7 +10,7 @@ const Signup = () => {
     const { createUser, googleSignIn, setLoading } = useContext(AuthContext);
     const navigate = useNavigate();
     const location =useLocation();
-    const from = location.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || '/addtask';
 
     const handleSignup = event => {
         event.preventDefault();

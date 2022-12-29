@@ -9,7 +9,7 @@ import { AuthContext } from './Component/AuthProvider/AuthProvider';
 function App() {
   const {theme} = useContext(AuthContext);
   return (
-    <div className={`App${theme} text-center`}>
+    <div className={`App${theme} text-center max-w-[1500px] mx-auto`}>
         <RouterProvider router={router}></RouterProvider>
         <Toaster></Toaster>
     </div>

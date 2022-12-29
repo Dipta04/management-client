@@ -13,16 +13,18 @@ const Navbar = () => {
     }
 
     const menuItems = <>
-        <li className="flex"><Link to='/addtask' className='flex items-center px-3 -mb-1 text-violet-400'>Add Task</Link></li>
-        <li className="flex"><Link to='/mytask' className='flex items-center px-3 -mb-1 text-violet-400'>My Task</Link></li>
-        <li className="flex"><Link to='/completedTask' className='flex items-center px-3 -mb-1 text-violet-400'>Completed Task</Link></li>
+        <li className="flex"><Link to='/addtask' className='flex items-center px-1 -mb-1 text-violet-400'>Add Task</Link></li>
+        <li className="flex"><Link to='/mytask' className='flex items-center px-1 -mb-1 text-violet-400'>My Task</Link></li>
+        <li className="flex"><Link to='/completedTask' className='flex items-center px-1 -mb-1 text-violet-400'>Completed</Link></li>
 
         <li className="flex">
+            { user?.uid &&
             <label for="Toggle4" className="inline-flex items-center p-1 cursor-pointer text-gray-900 font-bold">
                 <input id="Toggle4" type="checkbox" className="hidden peer" />
-                <span onClick={toggleTheme} className="px-4 py-2 bg-gray-600 peer-checked:bg-gray-300">OFF</span>
-                <span onClick={toggleTheme} className="px-4 py-2 bg-gray-300 peer-checked:bg-violet-400">ON</span>
+                <span onClick={toggleTheme} className="px-1 py-2 bg-gray-600 peer-checked:bg-gray-300">Dark</span>
+                <span onClick={toggleTheme} className="px-1 py-2 bg-gray-300 peer-checked:bg-violet-400">Light</span>
             </label>
+           } 
         </li>
 
     </>

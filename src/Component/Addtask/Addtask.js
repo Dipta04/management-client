@@ -20,7 +20,7 @@ const Addtask = () => {
         date,
         description
     }
-    fetch('http://localhost:5000/addtasks',{
+    fetch('https://management-server-sigma.vercel.app/addtasks',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

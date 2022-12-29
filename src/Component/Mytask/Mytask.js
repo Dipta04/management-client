@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Mytask = () => {
@@ -7,8 +8,13 @@ const Mytask = () => {
     const { user } = useContext(AuthContext);
     const [tasks, setTasks] = useState([]);
 
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/completedTask';
+
     useEffect(() => {
-        fetch('http://localhost:5000/addtasks')
+        fetch('https://management-server-sigma.vercel.app/addtasks')
+            // fetch(`https://management-server-sigma.vercel.app/addtasks?email=${user?.email}`)
             .then(res => {
                 return res.json();
             })
@@ -19,28 +25,29 @@ const Mytask = () => {
     }, [])
 
     const handleDelete = id => {
-        fetch(`http://localhost:5000/addtasks/${id}`,{
+        fetch(`https://management-server-sigma.vercel.app/addtasks/${id}`, {
             method: 'DELETE',
         })
-        .then(res=>res.json())
-        .then(data=>{
-            if (data.deletedCount > 0) {
-                toast.success(`Product deleted successfully`);
-                const remaining = tasks.filter(odr => odr._id !== id);
-                setTasks(remaining);
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success(`Product deleted successfully`);
+                    const remaining = tasks.filter(odr => odr._id !== id);
+                    setTasks(remaining);
+                }
+            })
     }
 
     const handleCompleted = id => {
-        fetch(`http://localhost:5000/addtasks/complete/${id}`, {
+        fetch(`https://management-server-sigma.vercel.app/addtasks/complete/${id}`, {
             method: 'PUT',
         })
             .then(res => res.json())
             .then(data => {
-               if(data.modifiedCount > 0){
-                toast.success('Completed Task successful.')
-               }
+                if (data.modifiedCount > 0) {
+                    toast.success('Completed Task successful.')
+                    navigate(from, { replace: true });
+                }
             })
     }
 
@@ -64,7 +71,7 @@ const Mytask = () => {
                     <tbody>
 
                         {
-                            
+
                             tasks.map((task, i) =>
 
                                 <tr className="border-b border-opacity-20 border-gray-700 bg-gray-800">
@@ -84,8 +91,9 @@ const Mytask = () => {
                                             Delete
                                         </button>
                                     </td>
+
                                     <td className="p-3">
-                                        <button onClick={() => handleCompleted(task._id)} class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded">
+                                        <button onClick={() => handleCompleted(task._id)} className="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded">
                                             Completed
                                         </button>
                                     </td>

@@ -6,6 +6,12 @@ const Navbar = () => {
 
     const { user, logOut, toggleTheme } = useContext(AuthContext);
 
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.log(error));
+    }
+
     const menuItems = <>
         <li className="flex"><Link to='/addtask' className='flex items-center px-3 -mb-1 text-violet-400'>Add Task</Link></li>
         <li className="flex"><Link to='/mytask' className='flex items-center px-3 -mb-1 text-violet-400'>My Task</Link></li>
@@ -38,8 +44,16 @@ const Navbar = () => {
 
                     </ul>
                     <div className="items-center flex-shrink-0 lg:flex">
-                        <button className="self-center px-2 py-3 font-semibold rounded"><Link to='/signin'>Sign in</Link></button>
-                        <button className="self-center px-2 py-3 font-semibold rounded"><Link to='/signup'>Sign up</Link></button>
+                        {
+                            user?.uid
+                                ?
+                                <button onClick={handleLogOut} className="self-center px-2 py-3 font-semibold rounded">Logout</button>
+                                :
+                                <div>
+                                    <button className="self-center px-2 py-3 font-semibold rounded"><Link to='/'>Login</Link></button>
+                                    <button className="self-center px-2 py-3 font-semibold rounded"><Link to='/signup'>Sign up</Link></button>
+                                </div>
+                        }
                     </div>
                     <button className="items-stretch space-x-3 flex lg:hidden">
                         {menuItems}

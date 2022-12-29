@@ -12,7 +12,7 @@ const Complete = () => {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/addtasks')
+        fetch('https://management-server-sigma.vercel.app/addtasks')
             .then(res => {
                 return res.json();
             })
@@ -23,7 +23,7 @@ const Complete = () => {
     }, [])
 
     const handleDelete = id => {
-        fetch(`http://localhost:5000/addtasks/${id}`,{
+        fetch(`https://management-server-sigma.vercel.app/addtasks/${id}`,{
             method: 'DELETE',
         })
         .then(res=>res.json())
@@ -37,7 +37,7 @@ const Complete = () => {
     }
 
     const handleNotCompleted = id => {
-        fetch(`http://localhost:5000/addtasks/notcomplete/${id}`, {
+        fetch(`https://management-server-sigma.vercel.app/addtasks/notcomplete/${id}`, {
             method: 'PUT',
         })
             .then(res => res.json())
@@ -87,12 +87,12 @@ const Complete = () => {
                                     </td>
                                     <td className="p-3">
 
-                                        <button onClick={() => handleDelete(task._id)} class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                        <button onClick={() => handleDelete(task._id)} className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                             Delete
                                         </button>
                                     </td>
                                     <td className="p-3">
-                                        <button onClick={() => handleNotCompleted(task._id)} class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded">
+                                        <button onClick={() => handleNotCompleted(task._id)} className="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded">
                                            Not Completed
                                         </button>
                                     </td>
